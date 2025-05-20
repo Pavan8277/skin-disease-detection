@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Disease Detector</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Import Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400&display=swap');
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            color: #2c3e50;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 4px;
+            background-color: #009688;
+            margin: 10px auto;
+            border-radius: 5px;
+        }
+
+        h3 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5rem;
+            color: #34495e;
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/static/images/rm380-11.jpg');
+            background-size: cover;
+            color: #333;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            position: fixed;
+            bottom: 0%;
+            left: 20px;
+            padding: 20px;
+            width: 150px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin: 15px 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: Black;
+            font-size: 20px;
+            padding: 10px;
+            display: block;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: skyblue;
+        }
+
+        .profile-sidebar {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            background: #34495e;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        #profile-logo i {
+            font-size: 50px;
+            color: #ecf0f1;
+        }
+
+        .container {
+            margin-left: 20px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 40px);
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+
+        .instruction-box {
+            position:relative;
+            top:-100px;
+            right:-70px;;
+             
+            width: 400px;
+            padding: 20px;
+            border: 2px solid #009688;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-right: 200px;
+        }
+
+        .instruction-box p {
+            font-size: 16px;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        #result {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            height: 50%;
+            width: 250px;
+            padding: 20px;
+            opacity: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .upload-btn {
+            position: relative;
+            top:-100px;
+            right: -170px;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            margin: 50px;
+            transition: background-color 0.3s;
+        }
+
+        .upload-btn:hover {
+            background-color: #3498db;
+        }
+
+        #profileDisplay {
+            position: absolute;
+            top: 120px;
+            left: 20px;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Skin Disease Detector</h1>
+
+    <!-- Profile Logo -->
+    <div class="profile-sidebar" id="profile-sidebar">
+        <div id="profile-logo">
+            <i class="fas fa-user-circle"></i>
+        </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <ul>
+            <b>
+            <li id="logout"><a>Logout</a></li>
+<li id="about"><a>About</a></li>
+<li id="services"><a>Services</a></li>
+<li id="contact"><a>Contact</a></li>
+
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-section">
+            <!-- Instruction Box -->
+            <div class="instruction-box">
+                <h3>Instructions</h3>
+                <p>1. Click on "Upload File" to select an image of your skin condition.</p>
+                <p>2. Ensure the image is clear and properly lit for accurate results.</p>
+                <p>3. Wait for a few moments as we process your image and provide predictions.</p>
+            </div>
+
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <button id="upload-btn" class="upload-btn">Upload File</button>
+                <input type="file" id="file-input" style="display: none;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Result Container -->
+    <div id="result">
+        <!-- The result will be displayed here -->
+    </div>
+
+    <!-- Profile Info Display -->
+    <div id="profileDisplay">
+        <!-- Profile details will be displayed here -->
+    </div>
+
+    <script>
+        document.getElementById("logout").addEventListener("click", function () {
+             
+            window.location.href = "/login";
+            
+        });
+         document.getElementById("about").addEventListener("click", function () {
+             
+            window.location.href = "/about";
+            
+        });
+         document.getElementById("services").addEventListener("click", function () {
+             
+            window.location.href = "/service";
+            
+        });
+         document.getElementById("contact").addEventListener("click", function () {
+             
+            window.location.href = "/contact";
+            
+        });
+        document.getElementById("upload-btn").addEventListener("click", function () {
+            document.getElementById("file-input").click();
+        });
+
+        document.getElementById("file-input").addEventListener("change", function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                displayResult("Analysing image...", "");
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const imageSrc = e.target.result;
+                    uploadFile(file,imageSrc);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById("profile-logo").addEventListener("click", function () {
+            const profileDisplay = document.getElementById('profileDisplay');
+            const profileData = localStorage.getItem('profile');
+
+            if (profileData) {
+                const prof = JSON.parse(profileData);
+                profileDisplay.innerHTML = `<p>${prof.email}</p>`;
+            } else {
+                profileDisplay.innerHTML = '<p>No profile data found.</p>';
+            }
+
+            // Toggle visibility
+            if (profileDisplay.style.display === 'none' || profileDisplay.style.display === '') {
+                profileDisplay.style.display = 'block';
+            } else {
+                profileDisplay.style.display = 'none';
+            }
+        });
+
+        function uploadFile(file,imageSrc) {
+            const formData = new FormData();
+            formData.append("file", file);
+
+            fetch('http://localhost:5500/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.prediction == 0) {
+    displayResult("Result:Acne", imageSrc);
+} else if (data.prediction == 1) {
+    displayResult("Result:Actinic Keratosis", imageSrc);
+} else if (data.prediction == 2) {
+    displayResult("Result:Atopic Dermatitis", imageSrc);
+} else if (data.prediction == 3) {
+    displayResult("Result:Bullous Disorders", imageSrc);
+} else if (data.prediction == 4) {
+    displayResult("Result:Cellulitis", imageSrc);
+} else if (data.prediction == 5) {
+    displayResult("Result:Eczema", imageSrc);
+} else if (data.prediction == 6) {
+    displayResult("Result:Exanthems", imageSrc);
+} else if (data.prediction == 7) {
+    displayResult("Result:Hair Loss", imageSrc);
+} else if (data.prediction == 8) {
+    displayResult("Result:AIDS-Related Skin Conditions", imageSrc);
+} else if (data.prediction == 9) {
+    displayResult("Result:Light-Induced Diseases", imageSrc);
+} else if (data.prediction == 10) {
+    displayResult("Result:Lupus", imageSrc);
+} else if (data.prediction == 11) {
+    displayResult("Result:Melanoma", imageSrc);
+} else if (data.prediction == 12) {
+    displayResult("Result:Nail Fungus", imageSrc);
+} else if (data.prediction == 13) {
+    displayResult("Result:Poison Ivy", imageSrc);
+} else if (data.prediction == 14) {
+    displayResult("Result:Psoriasis", imageSrc);
+} else if (data.prediction == 15) {
+    displayResult("Result:Scabies/Lyme Disease", imageSrc);
+} else if (data.prediction == 16) {
+    displayResult("Result:Systemic Skin Conditions", imageSrc);
+} else if (data.prediction == 17) {
+    displayResult("Result:Tinea (Ringworm)", imageSrc);
+} else if (data.prediction == 18) {
+    displayResult("Result:Urticaria (Hives)", imageSrc);
+} else if (data.prediction == 19) {
+    displayResult("Result:Vascular Tumors", imageSrc);
+} else if (data.prediction == 20) {
+    displayResult("Result:Vasculitis", imageSrc);
+} else if (data.prediction == 21) {
+    displayResult("Result:Warts/Molluscum", imageSrc);
+}
+
+else {
+                    displayResult("Error: " + data.error, imageSrc);
+                }
+            })
+            .catch(() => {
+                displayResult("Error: Failed to make prediction", imageSrc);
+            });
+        }
+        function loadingpage() {
+            window.location.href = '/about';
+        }
+        function displayResult(title, imageSrc) {
+            const resultContainer = document.getElementById("result");
+            resultContainer.innerHTML = `
+                <div>
+                    <h2>Processing image...</h2>
+                </div>
+            `;
+            setTimeout(() => {
+                resultContainer.innerHTML = `
+                    <div>
+                        <h3>${title}</h3>
+                        <img src="${imageSrc}" alt="Uploaded Image" style="max-width: 100%; border-radius: 10px; margin-top: 10px;">
+                    </div>
+                `;
+            }, 4000);
+        }
+    </script>
+</body>
+</html>

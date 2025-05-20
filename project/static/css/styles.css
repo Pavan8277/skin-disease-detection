@@ -1,0 +1,280 @@
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+img{
+width: 20px;
+height: 20px;
+
+}
+/* Body setup with background image and full screen */
+body, html {
+    height: 100%;
+    width: 100%;
+    display: flex;
+     
+    background-image:url('/static/images/medical-desk-with-stethoscope-mask.jpg'); /* Replace with your medical-themed image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Overlay background to make the content stand out */
+.background-container {
+     position:absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+     
+}
+
+/* Centering the login container */
+.login-container {
+    
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    
+}
+/* Basic styling for the <nav> */
+nav {
+    margin-bottom: 50%;
+  }
+  .n{
+    color: black;
+    position: fixed;  /* Fixed positioning to keep the nav fixed at the top-left */
+    top: 0;           /* Align it to the top of the screen */
+    left: 0;          /* Align it to the left of the screen */
+    padding: 15px;
+    width: 200px;     /* Set the width for the vertical navigation bar */
+    height: 100%;     /* Full height of the screen */
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+    z-index: 1000; 
+  }
+  .n a{
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  
+  /* Styling for the unordered list inside <nav> */
+  nav ul {
+    list-style: none; /* Remove default list style */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    display: flex; /* Use Flexbox to align items horizontally */
+    justify-content: space-between; /* Align items with space between them */
+  }
+  
+  /* Styling for list items (<li>) inside <nav> */
+  nav ul li {
+    margin: 0 15px; /* Space between list items */
+  }
+  
+  /* Styling for anchor tags inside the list items */
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 15px;
+    display: block;
+  }
+  
+  /* Hover effect for anchor tags */
+  nav ul li a:hover {
+    background-color:#34d3db;
+    border-radius: 5px;
+  }
+  
+
+/* Style for the login box */
+.login-box {
+    background: rgba(255, 255, 255, 0.9); /* White background with opacity */
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    border: 2px solid black;
+}
+
+h2 {
+    padding:20px;
+    border-radius: 10%;
+    font-family:'Times New Roman', Times, serif;
+
+margin-bottom: 20px;
+    color: #2C3E50; /* Dark blue color for the heading */
+    font-weight: 600;
+     
+}
+
+h{
+    text-align:center;
+}
+/* Styling the input fields */
+.input-box {
+    border-color: black;
+    margin-bottom: 15px;
+}
+h2{
+    padding-top:10;
+
+
+
+}
+
+.input-box input {
+   
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid black; /* Blue border */
+    border-radius: 0.1px;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.input-box input:focus {
+    border-color:black; /* Green border on focus */
+}
+
+.input-box:hover{
+    border-color: black;
+
+
+}
+/* Styling the submit button */
+.login-btn button {
+    width: 50%;
+    padding: 10px;
+    background-color:#34d3db;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-btn button:hover {
+    background-color: #2980b9; /* Darker blue when hovered */
+}
+.input-box i {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #888;
+}
+
+/* Add hover effect for the eye icon */
+.input-box i:hover {
+    color: #333;
+}
+/* styles.css */
+body {
+    background-image: url('medical-desk-with-stethoscope-mask.jpg');
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+     
+    color: #333;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.profile-sidebar {
+    
+    color: black;
+    width: 250px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-logo i {
+    font-size: 5em;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.profile-info h2 {
+    
+    background-color:black;
+    color: white;
+    font-size: 1em;
+    margin: 10px 0;
+    text-align: left;
+}
+
+.main-section {
+    flex-grow: 1;
+    padding: 20px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-btn, .camera-btn {
+    background: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.upload-btn:hover, .camera-btn:hover {
+    background: #0056b3;
+}
+@media (max-width: 768px) {
+    .profile-sidebar {
+        width: 100px;
+    }
+
+    .main-section h1 {
+        font-size: 1.5em;
+    }
+
+    .upload-btn, .camera-btn {
+        width: 80%;
+    }
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+    .login-box {
+        width: 90%;
+        padding: 20px 15px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .input-box input {
+        font-size: 14px;
+    }
+
+    .login-btn button {
+        font-size: 14px;
+    }
+}
