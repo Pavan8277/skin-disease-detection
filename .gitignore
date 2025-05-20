@@ -10,11 +10,11 @@ __pycache__/
 *.pyc
 
 # Ignore model and dataset files
-*.h5
+ 
 *.pkl
 *.csv
 dataset/
-model/
+ 
  
 
 # Ignore IDE folders
