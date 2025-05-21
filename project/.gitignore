@@ -1,0 +1,22 @@
+# Ignore virtual environments
+env/
+venv/
+tf-env/
+tensorflow_env/
+
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore model and dataset files
+ 
+*.pkl
+*.csv
+dataset/
+ 
+ 
+
+# Ignore IDE folders
+.vscode/
+.idea/
