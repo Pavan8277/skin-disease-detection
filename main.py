@@ -68,6 +68,7 @@ def predict():
         predicted_class = np.argmax(prediction, axis=-1)
         return jsonify({'prediction': predicted_class.tolist()})
     except Exception as e:
+        print("Prediction error:", e) 
         return jsonify({'error': str(e)}), 500
 
 # Render-compatible entry point
